@@ -5,4 +5,7 @@ package nl.edmi.NeuralNetwork;
  */
 public class NeuralNet {
 
+    public NeuralNet(){
+        System.out.print("3");
+    }
 }

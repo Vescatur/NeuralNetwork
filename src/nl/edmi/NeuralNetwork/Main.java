@@ -3,9 +3,8 @@ package nl.edmi.NeuralNetwork;
 public class Main {
 
     public Main(){
-        NeuralNet Net = new NeuralNet();
-        double[] inputs = {1.0,1.0};
-        System.out.println(Net.CalculateOutput(inputs));
+        EvolutionTest evolutionTest = new EvolutionTest();
+        evolutionTest.start();
     }
 
     public static void main(String[] args) {

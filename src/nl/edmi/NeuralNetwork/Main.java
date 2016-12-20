@@ -3,8 +3,9 @@ package nl.edmi.NeuralNetwork;
 public class Main {
 
     public Main(){
-        System.out.print("2");
-        new NeuralNet();
+        NeuralNet Net = new NeuralNet();
+        double[] inputs = {1.0,1.0};
+        System.out.println(Net.CalculateOutput(inputs));
     }
 
     public static void main(String[] args) {

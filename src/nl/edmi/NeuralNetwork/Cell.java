@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Cell {
     NeuralNet Net;
+    private double cost;
 
     public Cell(){
         Net = new NeuralNet();
@@ -20,7 +21,20 @@ public class Cell {
         }
     }
 
+    public String toString(){
+        return cost +"";
+    }
+
     public double GetScore(double[] input) {
         return Net.CalculateOutput(input);
     }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
 }

@@ -11,7 +11,7 @@ public class NeuralNet {
     int hiddenLayer = 3;
     int outputLayer = 1;
 
-    int[] Layers = {2,3,3,1};
+    int[] Layers = {2,5,4,3,2,1};
 
     ArrayList<ArrayList<ArrayList<Double>>> synaps;
     // synaps[colum][nodeFrom][nodeTo]

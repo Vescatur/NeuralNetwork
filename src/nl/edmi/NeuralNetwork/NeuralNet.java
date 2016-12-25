@@ -11,7 +11,7 @@ public class NeuralNet {
     int hiddenLayer = 3;
     int outputLayer = 1;
 
-    int[] Layers = {2,3,3,1};
+    int[] Layers = {2,5,4,3,2,1};
 
     ArrayList<ArrayList<ArrayList<Double>>> synaps;
     // synaps[colum][nodeFrom][nodeTo]
@@ -36,7 +36,7 @@ public class NeuralNet {
             for (int nodeFrom=0; nodeFrom < nodes.get(colum).size(); nodeFrom++) {
                 synaps.get(colum).add(new ArrayList<Double>());
                 for (int nodeTo=0; nodeTo < nodes.get(colum+1).size(); nodeTo++) {
-                    synaps.get(colum).get(nodeFrom).add(1.0);
+                    synaps.get(colum).get(nodeFrom).add(Math.random()*2-1);
                 }
             }
         }
@@ -53,6 +53,7 @@ public class NeuralNet {
                 sum += nodes.get(colum-1).get(nodeFrom) * synaps.get(colum-1).get(nodeFrom).get(nodeTo);
             }
             nodes.get(colum).set(nodeTo,sigmoid(sum));
+            //nodes.get(colum).set(nodeTo,sum);
         }
     }
 

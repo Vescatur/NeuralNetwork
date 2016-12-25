@@ -6,8 +6,10 @@ package nl.edmi.NeuralNetwork;
 public class EvolutionBetting {
 
     public EvolutionBetting(){
-        BettingCell cell = new BettingCell();
-        System.out.println(cell.toString());
+        BettingCell cell1 = new BettingCell();
+        BettingCell cell2 = new BettingCell();
+
+        GameManager.FightTwoCells(cell1,cell2,1,0.5,0.3,0.8);
     }
 
 }

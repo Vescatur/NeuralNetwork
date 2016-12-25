@@ -10,7 +10,8 @@ public class Cell {
     private double cost;
 
     public Cell(){
-        Net = new NeuralNet();
+        int[] Layers = {2,5,4,3,2,1};
+        Net = new NeuralNet(Layers);
     }
 
     public String toString(){

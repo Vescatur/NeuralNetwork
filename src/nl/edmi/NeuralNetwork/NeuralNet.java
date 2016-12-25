@@ -18,7 +18,8 @@ public class NeuralNet {
     ArrayList<ArrayList<Double>> nodes;
     // nodes[colum][node]
 
-    public NeuralNet(){
+    public NeuralNet(int[] TLayers){
+        Layers = TLayers;
         nodes = new ArrayList<ArrayList<Double>>();
         for (int colum=0; colum < Layers.length; colum++) {
             nodes.add(new ArrayList<Double>());

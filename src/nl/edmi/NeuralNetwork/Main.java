@@ -3,10 +3,10 @@ package nl.edmi.NeuralNetwork;
 public class Main {
 
     public Main(){
-        //EvolutionTest evolutionTest = new EvolutionTest();
-        //evolutionTest.start();
+        EvolutionTest evolutionTest = new EvolutionTest();
+        evolutionTest.start();
 
-        EvolutionBetting evolutionBetting = new EvolutionBetting();
+        //EvolutionBetting evolutionBetting = new EvolutionBetting();
 
     }
 

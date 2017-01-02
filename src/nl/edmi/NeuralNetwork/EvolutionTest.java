@@ -110,10 +110,10 @@ public class EvolutionTest {
 
         double[] input1 = {1.0, 1.0};
         double score1 = cell.GetScore(input1);
-        if(score1>0.2) {
-            sum += Math.pow(Math.abs(score1 - 0.2),2)+0.1;
+        if(score1<0.8) {
+            sum += Math.pow(Math.abs(score1 - 0.8),2)+0.1;
         }else{
-            sum += Math.pow(Math.abs(score1 - 0.2),2);
+            sum += Math.pow(Math.abs(score1 - 0.8),2);
         }
         double[] input2 = {0.0, 1.0};
         double score2 = cell.GetScore(input2);

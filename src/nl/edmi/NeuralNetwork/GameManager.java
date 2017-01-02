@@ -20,22 +20,24 @@ public final class GameManager {
         if(FirstMoveCell1>FirstMoveCell2){
             inzet = FirstMoveCell1;
         }else{
-            inzet = FirstMoveCell2; 
+            inzet = FirstMoveCell2;
         }
+
+        double verlies = Math.abs(FirstMoveCell1-FirstMoveCell2);
 
         double SecondMoveCell1 = cell1.SecondMove(rand1, hand1, inzet);
         double SecondMoveCell2 = cell2.SecondMove(rand2, hand2, inzet);
 
-        double ThirdMoveCell1 = cell1.ThirdMove(rand1, hand1, FirstMoveCell1, FirstMoveCell2, SecondMoveCell1, SecondMoveCell2);
-        double ThirdMoveCell2 = cell2.ThirdMove(rand2, hand2, FirstMoveCell2, FirstMoveCell1, SecondMoveCell2, SecondMoveCell1);
+        //double ThirdMoveCell1 = cell1.ThirdMove(rand1, hand1, FirstMoveCell1, FirstMoveCell2, SecondMoveCell1, SecondMoveCell2);
+        //double ThirdMoveCell2 = cell2.ThirdMove(rand2, hand2, FirstMoveCell2, FirstMoveCell1, SecondMoveCell2, SecondMoveCell1);
         System.out.println(FirstMoveCell1);
         System.out.println(FirstMoveCell2);
 
         System.out.println(SecondMoveCell1);
         System.out.println(SecondMoveCell2);
 
-        System.out.println(ThirdMoveCell1);
-        System.out.println(ThirdMoveCell2);
+        //System.out.println(ThirdMoveCell1);
+        //System.out.println(ThirdMoveCell2);
         return 1;
     }
 }

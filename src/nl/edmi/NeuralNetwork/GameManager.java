@@ -1,43 +1,109 @@
 package nl.edmi.NeuralNetwork;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ivan on 25-12-2016.
  */
 public final class GameManager {
 
-    private GameManager(){
+    private GameManager() {
 
     }
 
+    private static double CalculateInzet(BetAnswer a1, BetAnswer a2) {
+        return Math.max(a1.getInzet(), a2.getInzet());
+    }
 
+    private static double CalculateVerlies(BetAnswer a1, BetAnswer a2) {
+        return Math.max(a2.getInzet() - a1.getInzet(),0);
+    }
 
-    public static int FightTwoCells(BettingCell cell1,BettingCell cell2,double hand1,double hand2,double rand1,double rand2){
-        double inzet;
+    private static void hey() {
 
-        double FirstMoveCell1 = cell1.FirstMove(rand1);
-        double FirstMoveCell2 = cell2.FirstMove(rand2);
+    }
 
-        if(FirstMoveCell1>FirstMoveCell2){
-            inzet = FirstMoveCell1;
-        }else{
-            inzet = FirstMoveCell2;
+    public static double RoundTwoCells(BettingCell cell1, BettingCell cell2){
+        double score = 0;
+        for(int hand1=0;hand1<=10;hand1++){
+            for(int hand2=0;hand2<=10;hand2++){
+                for(int rand1=0;rand1<=10;rand1++){
+                    for(int rand2=0;rand2<=10;rand2++){
+                        double ScoreFight = FightTwoCells(cell1,cell2,hand1,hand2,rand1,rand2);
+                        score+=ScoreFight;
+                    }
+                }
+            }
+        }
+        return score;
+    }
+
+    //return hoeveel cell1 verdient
+    public static double FightTwoCells(BettingCell cell1, BettingCell cell2, double hand1, double hand2, double rand1, double rand2) {
+
+        BetAnswer FirstMoveCell1 = cell1.FirstMove(rand1 / 10);
+        BetAnswer FirstMoveCell2 = cell2.FirstMove(rand2 / 10);
+        FirstMoveCell1.FirstRoundInzet();
+        FirstMoveCell2.FirstRoundInzet();
+
+        if (FirstMoveCell1.getStoppen() || FirstMoveCell2.getStoppen()) {
+            return 0.0;
         }
 
-        double verlies = Math.abs(FirstMoveCell1-FirstMoveCell2);
+        double inzet = CalculateInzet(FirstMoveCell1, FirstMoveCell2);
+        double verlies1 = CalculateVerlies(FirstMoveCell1, FirstMoveCell2);
+        double verlies2 = CalculateVerlies(FirstMoveCell2, FirstMoveCell1);
+        BetAnswer SecondMoveCell1 = cell1.SecondMove(rand1 / 10, hand1 / 10, inzet / 10, verlies1 / 10);
+        BetAnswer SecondMoveCell2 = cell2.SecondMove(rand2 / 10, hand2 / 10, inzet / 10, verlies2 / 10);
 
-        double SecondMoveCell1 = cell1.SecondMove(rand1, hand1, inzet);
-        double SecondMoveCell2 = cell2.SecondMove(rand2, hand2, inzet);
+        if (SecondMoveCell1.getStoppen() && SecondMoveCell2.getStoppen()) {
+            return 0.0;
+        } else if (SecondMoveCell1.getStoppen() || SecondMoveCell2.getStoppen()) {
+            double winner = 0;
+            double verlies = 0;
+            if (SecondMoveCell1.getStoppen()) {
+                winner = -1;
+                verlies = verlies1;
+            } else {
+                winner = 1;
+                verlies = verlies2;
+            }
+            return winner * (inzet - verlies);
+        }
 
-        //double ThirdMoveCell1 = cell1.ThirdMove(rand1, hand1, FirstMoveCell1, FirstMoveCell2, SecondMoveCell1, SecondMoveCell2);
-        //double ThirdMoveCell2 = cell2.ThirdMove(rand2, hand2, FirstMoveCell2, FirstMoveCell1, SecondMoveCell2, SecondMoveCell1);
-        System.out.println(FirstMoveCell1);
-        System.out.println(FirstMoveCell2);
 
-        System.out.println(SecondMoveCell1);
-        System.out.println(SecondMoveCell2);
+        inzet = inzet + CalculateInzet(SecondMoveCell1, SecondMoveCell2);
+        verlies1 = CalculateVerlies(SecondMoveCell1, SecondMoveCell2);
+        verlies2 = CalculateVerlies(SecondMoveCell2, SecondMoveCell1);
+        BetAnswer ThirdMoveCell1 = cell1.ThirdMove(rand1 / 10, hand1 / 10, inzet / 20, verlies1 / 10);
+        BetAnswer ThirdMoveCell2 = cell2.ThirdMove(rand2 / 10, hand2 / 10, inzet / 20, verlies2 / 10);
 
-        //System.out.println(ThirdMoveCell1);
-        //System.out.println(ThirdMoveCell2);
-        return 1;
+        if (ThirdMoveCell1.getStoppen() && ThirdMoveCell2.getStoppen()) {
+            return 0.0;
+        } else if (ThirdMoveCell1.getStoppen() || ThirdMoveCell2.getStoppen()) {
+            double winner = 0;
+            double verlies = 0;
+            if (ThirdMoveCell1.getStoppen()) {
+                winner = -1;
+                verlies = verlies1;
+            } else {
+                winner = 1;
+                verlies = verlies2;
+            }
+            return winner * (inzet - verlies);
+        }
+
+
+        if(hand1==hand2){
+            return 0;
+        }else if(hand1>hand2){
+            return inzet;
+        }else{
+            return inzet*-1;
+        }
+
+
+
+
     }
 }

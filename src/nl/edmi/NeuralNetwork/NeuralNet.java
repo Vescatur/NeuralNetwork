@@ -1,5 +1,6 @@
 package nl.edmi.NeuralNetwork;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ public class NeuralNet {
     int hiddenLayer = 3;
     int outputLayer = 1;
 
-    int[] Layers = {2,5,4,3,2,1};
+    int[] Layers = {2,5,4,3,2,2};
 
     ArrayList<ArrayList<ArrayList<Double>>> synaps;
     // synaps[colum][nodeFrom][nodeTo]
@@ -58,7 +59,7 @@ public class NeuralNet {
         }
     }
 
-    public double CalculateOutput(double[] input){
+    public ArrayList<Double> CalculateOutput(double[] input){
         for(int node=0; node < nodes.get(0).size(); node++){
             nodes.get(0).set(node,input[node]);
         }
@@ -66,6 +67,6 @@ public class NeuralNet {
         for(int colum=1; colum < nodes.size(); colum++) {
             CalculateColum(colum);
         }
-        return nodes.get(nodes.size()-1).get(0);
+        return nodes.get(nodes.size()-1);
     }
 }

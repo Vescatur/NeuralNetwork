@@ -1,6 +1,6 @@
-package nl.edmi.NeuralNetwork;
+package archive;
 
-import java.util.ArrayList;
+import nl.edmi.NeuralNetwork.NeuralNet;
 
 /**
  * Created by Ivan on 20-12-2016.
@@ -19,7 +19,7 @@ public class Cell {
     }
 
     public double GetScore(double[] input) {
-        return Net.CalculateOutput(input);
+        return Net.CalculateOutput(input).get(0);
     }
 
     public void setCost(double cost) {

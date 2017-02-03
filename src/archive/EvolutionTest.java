@@ -1,10 +1,9 @@
-package nl.edmi.NeuralNetwork;
+package archive;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ivan on 20-12-2016.

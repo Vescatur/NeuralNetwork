@@ -1,5 +1,6 @@
 package nl.edmi.NeuralNetwork;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ public class NeuralNet {
     int hiddenLayer = 3;
     int outputLayer = 1;
 
-    int[] Layers = {2,5,4,3,2,1};
+    int[] Layers = {2,5,4,3,2,2};
 
     ArrayList<ArrayList<ArrayList<Double>>> synaps;
     // synaps[colum][nodeFrom][nodeTo]
@@ -58,7 +59,7 @@ public class NeuralNet {
         }
     }
 
-    public double CalculateOutput(double[] input){
+    public ArrayList<Double> CalculateOutput(double[] input){
         for(int node=0; node < nodes.get(0).size(); node++){
             nodes.get(0).set(node,input[node]);
         }
@@ -66,6 +67,18 @@ public class NeuralNet {
         for(int colum=1; colum < nodes.size(); colum++) {
             CalculateColum(colum);
         }
-        return nodes.get(nodes.size()-1).get(0);
+        return nodes.get(nodes.size()-1);
+    }
+
+    public NeuralNet Clone(){
+        NeuralNet Net = new NeuralNet(Layers);
+        for (int colum=0; colum < Net.nodes.size()-1; colum++) {
+            for (int nodeFrom=0; nodeFrom < Net.nodes.get(colum).size(); nodeFrom++) {
+                for (int nodeTo=0; nodeTo < Net.nodes.get(colum+1).size(); nodeTo++) {
+                    Net.synaps.get(colum).get(nodeFrom).set(nodeTo,((Math.random()-0.5)/5)+this.synaps.get(colum).get(nodeFrom).get(nodeTo));
+                }
+            }
+        }
+        return  Net;
     }
 }

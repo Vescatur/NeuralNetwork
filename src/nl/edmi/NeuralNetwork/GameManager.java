@@ -22,16 +22,42 @@ public final class GameManager {
     private static void hey() {
 
     }
-
-    public static double RoundTwoCells(BettingCell cell1, BettingCell cell2){
+    //return hoeveel cell l een verdient
+    public static double RoundTwoCells(BettingCell cell1, BettingCell cell2,boolean printing){
         double score = 0;
+        double[][] scoreBijCategory = new double[4][11];
+
         for(int hand1=0;hand1<=10;hand1++){
             for(int hand2=0;hand2<=10;hand2++){
                 for(int rand1=0;rand1<=10;rand1++){
                     for(int rand2=0;rand2<=10;rand2++){
                         double ScoreFight = FightTwoCells(cell1,cell2,hand1,hand2,rand1,rand2);
                         score+=ScoreFight;
+                        scoreBijCategory[0][hand1] += ScoreFight;
+                        scoreBijCategory[1][hand2] += ScoreFight;
+                        scoreBijCategory[2][rand1] += ScoreFight;
+                        scoreBijCategory[3][rand2] += ScoreFight;
                     }
+                }
+            }
+        }
+        if(printing) {
+            for (int Category = 0; Category < 4; Category++) {
+                for (int Variable = 0; Variable <= 10; Variable++) {
+                    if (Category == 0) {
+                        System.out.print("hand1");
+                    } else if (Category == 1) {
+                        System.out.print("hand2");
+                    } else if (Category == 2) {
+                        System.out.print("rand1");
+                    } else if (Category == 3) {
+                        System.out.print("rand2");
+                    }
+                    System.out.print(" ");
+                    System.out.print(Variable);
+                    System.out.print(" ");
+
+                    System.out.println(scoreBijCategory[Category][Variable]);
                 }
             }
         }

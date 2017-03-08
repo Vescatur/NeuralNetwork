@@ -43,8 +43,16 @@ public class BettingNeuralNetCell extends BettingCell {
     // answer[0] = 0.5 -> onder 0.5 is doorgaan
     public BetAnswer ThirdMove(double random,double hand,double inzet,double verlies){
         double[] input = {random,hand,inzet,verlies};
-        ArrayList<Double> answerList = Net1.CalculateOutput(input);
+        ArrayList<Double> answerList = Net3.CalculateOutput(input);
         BetAnswer answer = new BetAnswer(answerList.get(0),answerList.get(1));
         return answer;
+    }
+
+    public BettingCell Clone(){
+        BettingNeuralNetCell Cell =  new BettingNeuralNetCell();
+        Cell.Net1 = Net1.Clone();
+        Cell.Net2 = Net2.Clone();
+        Cell.Net3 = Net3.Clone();
+        return Cell;
     }
 }
